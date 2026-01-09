@@ -7,13 +7,13 @@ variable "aws_region" {
 variable "database_name" {
   type        = string
   description = "Nome do Glue Database"
-  default     = "database_data_engineering_1"
+  default     = "database_engenharia_de_dados"
 }
 
 variable "table_name" {
   type        = string
   description = "Nome da tabela no Glue"
-  default     = "users_1"
+  default     = "usuários"
 }
 
 variable "s3_location" {
