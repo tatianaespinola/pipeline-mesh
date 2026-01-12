@@ -4,6 +4,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "database_name" {
+  type        = string
+  description = "Nome do banco de dados no Glue"
+  default     = "database_engenharia_de_dados"
+}
+
 variable "table_name" {
   type        = string
   description = "Nome da tabela no Glue"
