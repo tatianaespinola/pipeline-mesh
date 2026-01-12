@@ -13,7 +13,7 @@ variable "database_name" {
 variable "table_name" {
   type        = string
   description = "Nome da tabela no Glue"
-  default     = "usuários"
+  default     = "usuários_filtrados"
 }
 
 variable "s3_location" {

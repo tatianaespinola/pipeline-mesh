@@ -25,7 +25,7 @@ resource "aws_glue_catalog_table" "table" {
     }
 
     columns {
-      name = "name"
+      name = "nome"
       type = "string"
     }
 
