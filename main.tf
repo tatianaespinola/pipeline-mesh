@@ -1,7 +1,7 @@
 resource "aws_glue_catalog_table" "table" {
   name          = var.table_name
-  database_name = aws_glue_catalog_database.database.name
-  
+  database_name = var.database_name
+
   storage_descriptor {
     location      = var.s3_location
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
