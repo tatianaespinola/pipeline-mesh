@@ -1,7 +1,6 @@
 resource "aws_glue_catalog_table" "table" {
   name          = var.table_name
   database_name = var.database_name
-  table_type    = "EXTERNAL_TABLE"
 
   storage_descriptor {
     location      = var.s3_location
@@ -9,14 +8,12 @@ resource "aws_glue_catalog_table" "table" {
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 
     ser_de_info {
-      serialization_library = "org.apache.hadoop.hive.serde2.OpenCSVSerde"
-
-      parameters = {
-        "separatorChar" = ","
-        "quoteChar"     = "\""
-        "escapeChar"    = "\\"
+        name                  = "json_serde"
+        serialization_library = "org.openx.data.jsonserde.JsonSerDe"
+        parameters = {
+          "serialization.format" = "1"
+        }
       }
-    }
 
     columns {
       name = "id"
@@ -32,10 +29,5 @@ resource "aws_glue_catalog_table" "table" {
       name = "idade"
       type = "int"
     }
-  }
-
-  parameters = {
-    "skip.header.line.count" = "1"
-    "classification"         = "csv"
   }
 }
