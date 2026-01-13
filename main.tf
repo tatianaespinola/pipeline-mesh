@@ -1,25 +1,26 @@
-resource "aws_glue_catalog_table" "usuarios" {
-  name          = "usuarios"
-  database_name = aws_glue_catalog_database.db.name
+resource "aws_glue_catalog_table" "table" {
+  name          = var.table_name
+  database_name = var.database_name
   table_type    = "EXTERNAL_TABLE"
 
   storage_descriptor {
-    location      = "s3://meu-bucket/dados/usuarios/"
+    location      = var.s3_location
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 
-    serde_info {
+    ser_de_info {
       serialization_library = "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+
       parameters = {
-        separatorChar = ","
-        quoteChar     = "\""
-        escapeChar    = "\\"
+        "separatorChar" = ","
+        "quoteChar"     = "\""
+        "escapeChar"    = "\\"
       }
     }
 
     columns {
       name = "id"
-      type = "string"
+      type = "int"
     }
 
     columns {
@@ -29,7 +30,12 @@ resource "aws_glue_catalog_table" "usuarios" {
 
     columns {
       name = "idade"
-      type = "string"
+      type = "int"
     }
+  }
+
+  parameters = {
+    "skip.header.line.count" = "1"
+    "classification"         = "csv"
   }
 }
