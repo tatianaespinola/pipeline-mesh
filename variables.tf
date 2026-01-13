@@ -19,5 +19,5 @@ variable "table_name" {
 variable "s3_location" {
   type        = string
   description = "Localização dos dados no S3"
-  default     = "s3://armazenar-tabelas/usuarios/"
+  default     = "s3://armazenar-tabelas/usuarios_filtrados/"
 }
